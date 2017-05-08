@@ -1,11 +1,11 @@
 package com.francescofornasini.percentcontainer;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.widget.FrameLayout;
 
 /**
@@ -13,11 +13,9 @@ import android.widget.FrameLayout;
  */
 
 public class PercentContainer extends FrameLayout {
-    private static final String TAG = "PercentContainer";
 
-    public static final String OK = "ook";
-
-    private float percent = 0.1f;
+    private float percentX = -1f;
+    private float percentY = -1f;
 
     public PercentContainer(@NonNull Context context) {
         this(context, null);
@@ -29,21 +27,34 @@ public class PercentContainer extends FrameLayout {
 
     public PercentContainer(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-    }
 
+        TypedArray a = context.getTheme().obtainStyledAttributes(
+                attrs,
+                R.styleable.PercentContainer,
+                0, 0);
+
+        try {
+            percentX = a.getFloat(R.styleable.PercentContainer_x, percentX);
+            percentY = a.getFloat(R.styleable.PercentContainer_y, percentY);
+        } finally {
+            a.recycle();
+        }
+
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        int size = MeasureSpec.getSize(heightMeasureSpec);
-        int mode = MeasureSpec.getMode(heightMeasureSpec);
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+        int height = MeasureSpec.getSize(heightMeasureSpec);
 
-        Log.d(TAG, "onMeasure() called with: widthMeasureSpec = [" + widthMeasureSpec + "], heightMeasureSpec = [" + heightMeasureSpec + "]");
-        Log.d(TAG, "onMeasure() called with: heightMeasureSpecSize = [" + size + "], heightMeasureSpecMode = [" + mode + "]");
+        int defWidthMeasureSpec = percentX >= 0 ?
+                MeasureSpec.makeMeasureSpec(Math.round(width * percentX), MeasureSpec.EXACTLY) :
+                widthMeasureSpec;
 
-        int newHeightMeasureSpec = MeasureSpec.makeMeasureSpec(Math.round(size * percent), MeasureSpec.EXACTLY);
+        int defHeightMeasureSpec = percentY >= 0 ?
+                MeasureSpec.makeMeasureSpec(Math.round(height * percentY), MeasureSpec.EXACTLY) :
+                heightMeasureSpec;
 
-        super.onMeasure(widthMeasureSpec, newHeightMeasureSpec);
-
+        super.onMeasure(defWidthMeasureSpec, defHeightMeasureSpec);
     }
 }
