@@ -15,6 +15,8 @@ import android.widget.FrameLayout;
 public class PercentContainer extends FrameLayout {
     private static final String TAG = "PercentContainer";
 
+    public static final String OK = "ook";
+
     private float percent = 0.1f;
 
     public PercentContainer(@NonNull Context context) {
