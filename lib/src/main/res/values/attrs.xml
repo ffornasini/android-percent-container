@@ -1,0 +1,7 @@
+<resources>
+
+    <declare-styleable name="PercentContainer">
+        <attr name="x" format="float" />
+        <attr name="y" format="float" />
+    </declare-styleable>
+</resources>
