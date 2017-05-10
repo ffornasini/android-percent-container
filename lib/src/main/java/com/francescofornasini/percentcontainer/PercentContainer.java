@@ -42,6 +42,16 @@ public class PercentContainer extends FrameLayout {
 
     }
 
+    public void setPercentX(float percentX) {
+        this.percentX = percentX;
+        requestLayout();
+    }
+
+    public void setPercentY(float percentY) {
+        this.percentY = percentY;
+        requestLayout();
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
