@@ -38,28 +38,32 @@ public class EnhancedRecyclerView extends RecyclerView {
             newPaddingBottom = 0;
         } else {
 
-            try {
-                newPaddingStart = (getWidth() / 2) - (getLayoutManager().findViewByPosition(0).getWidth() / 2);
-            } catch (Exception e) {
-                newPaddingStart = paddingStart;
+            if (adjustPaddingHorizontal) {
+                try {
+                    newPaddingStart = (getWidth() / 2) - (getLayoutManager().findViewByPosition(0).getWidth() / 2);
+                } catch (Exception e) {
+                    newPaddingStart = paddingStart;
+                }
+
+                try {
+                    newPaddingEnd = (getWidth() / 2) - (getLayoutManager().findViewByPosition(getAdapter().getItemCount() - 1).getWidth() / 2);
+                } catch (Exception e) {
+                    newPaddingEnd = paddingEnd;
+                }
             }
 
-            try {
-                newPaddingEnd = (getWidth() / 2) - (getLayoutManager().findViewByPosition(getAdapter().getItemCount() - 1).getWidth() / 2);
-            } catch (Exception e) {
-                newPaddingEnd = paddingEnd;
-            }
+            if (adjustPaddingVertical) {
+                try {
+                    newPaddingTop = (getHeight() / 2) - (getLayoutManager().findViewByPosition(getAdapter().getItemCount() - 1).getHeight() / 2);
+                } catch (Exception e) {
+                    newPaddingTop = paddingTop;
+                }
 
-            try {
-                newPaddingTop = (getHeight() / 2) - (getLayoutManager().findViewByPosition(getAdapter().getItemCount() - 1).getHeight() / 2);
-            } catch (Exception e) {
-                newPaddingTop = paddingTop;
-            }
-
-            try {
-                newPaddingBottom = (getHeight() / 2) - (getLayoutManager().findViewByPosition(getAdapter().getItemCount() - 1).getHeight() / 2);
-            } catch (Exception e) {
-                newPaddingBottom = paddingBottom;
+                try {
+                    newPaddingBottom = (getHeight() / 2) - (getLayoutManager().findViewByPosition(getAdapter().getItemCount() - 1).getHeight() / 2);
+                } catch (Exception e) {
+                    newPaddingBottom = paddingBottom;
+                }
             }
         }
 
@@ -112,11 +116,13 @@ public class EnhancedRecyclerView extends RecyclerView {
     @Override
     public void onViewAdded(View child) {
         super.onViewAdded(child);
-        child.post(new Runnable() {
-            @Override
-            public void run() {
-                EnhancedRecyclerView.this.refreshPadding();
-            }
-        });
+        if (adjustPaddingHorizontal || adjustPaddingVertical) {
+            child.post(new Runnable() {
+                @Override
+                public void run() {
+                    EnhancedRecyclerView.this.refreshPadding();
+                }
+            });
+        }
     }
 }
