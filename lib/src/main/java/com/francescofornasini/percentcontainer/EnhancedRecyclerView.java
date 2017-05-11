@@ -50,6 +50,9 @@ public class EnhancedRecyclerView extends RecyclerView {
                 } catch (Exception e) {
                     newPaddingEnd = paddingEnd;
                 }
+            } else {
+                newPaddingStart = paddingStart;
+                newPaddingEnd = paddingEnd;
             }
 
             if (adjustPaddingVertical) {
@@ -64,6 +67,9 @@ public class EnhancedRecyclerView extends RecyclerView {
                 } catch (Exception e) {
                     newPaddingBottom = paddingBottom;
                 }
+            } else {
+                newPaddingTop = paddingTop;
+                newPaddingBottom = paddingBottom;
             }
         }
 
