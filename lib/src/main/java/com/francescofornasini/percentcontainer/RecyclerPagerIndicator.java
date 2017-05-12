@@ -1,4 +1,4 @@
-package com.francescofornasini.provasnaprecycler;
+package com.francescofornasini.percentcontainer;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -10,8 +10,6 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.francescofornasini.percentcontainer.EnhancedRecyclerView;
 
 /**
  * Created by franc on 11/05/2017.
@@ -68,7 +66,7 @@ public class RecyclerPagerIndicator extends EnhancedRecyclerView {
     }
 
 
-    public void setRecycler(RecyclerView source, String tag) {
+    public void setRecycler(final RecyclerView source, String tag) {
         this.tag = tag;
         post(new Runnable() {
             @Override
@@ -172,12 +170,22 @@ public class RecyclerPagerIndicator extends EnhancedRecyclerView {
             super(itemView);
         }
 
-        public void bindView(int position, int currentPosition, RecyclerView source) {
-            itemView.setOnClickListener(v -> innerScrollToPosition(source, getAdapterPosition()));
+        public void bindView(int position, int currentPosition, final RecyclerView source) {
+            itemView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    innerScrollToPosition(source, IndicatorHolder.this.getAdapterPosition());
+                }
+            });
         }
     }
 
-    private IIndicatorHolder externalHolder = (parent, viewType) -> new IndicatorHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_indicator, parent, false));
+    private IIndicatorHolder externalHolder = new IIndicatorHolder() {
+        @Override
+        public IndicatorHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return null;
+        }
+    };
 
     public interface IIndicatorHolder {
         IndicatorHolder onCreateViewHolder(ViewGroup parent, int viewType);

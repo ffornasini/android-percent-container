@@ -9,4 +9,9 @@
         <attr name="adjust_padding_horizontal" format="boolean" />
         <attr name="adjust_padding_vertical" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="RecyclerPagerIndicator">
+        <attr name="wrap" format="boolean" />
+        <attr name="stable" format="boolean" />
+    </declare-styleable>
 </resources>
