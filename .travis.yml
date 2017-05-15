@@ -7,7 +7,8 @@ android:
    - platform-tools
    - build-tools-25.0.2
    - android-25
-   - extra
+   - extra-android-m2repository
+   - extra-android-support
 
 before_script:
  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
