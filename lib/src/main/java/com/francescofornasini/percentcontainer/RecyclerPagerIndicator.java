@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -15,10 +14,14 @@ import android.view.ViewGroup;
  * Created by franc on 11/05/2017.
  */
 
-public class RecyclerPagerIndicator extends EnhancedRecyclerView {
+public class RecyclerPagerIndicator extends EnhancedRecyclerViewV3 {
 
     public static final boolean DEFAULT_WRAP = true;
     public static final boolean DEFAULT_STABLE = true;
+
+    public static final int UPDATE_ALWAYS = 0;
+    public static final int UPDATE_ON_SCROLL_STATUS_CHANGE = 1;
+
 
     private final IndicatorAdapter adapter;
     private final LinearSnapHelper linearSnapHelper;
@@ -66,33 +69,45 @@ public class RecyclerPagerIndicator extends EnhancedRecyclerView {
     }
 
 
-    public void setRecycler(final RecyclerView source, String tag) {
+    public void setRecycler(final EnhancedRecyclerViewV3 source, final int flags, String tag) {
         this.tag = tag;
         post(new Runnable() {
             @Override
             public void run() {
                 RecyclerPagerIndicator.this.source = source;
                 adapter.notifyDataSetChanged();
-                updateCurrentPosition();
 
-                source.addOnScrollListener(new OnScrollListener() {
-                    @Override
-                    public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                        updateCurrentPosition();
+                updateCurrentPosition(source.getCurrentPage());
 
-                    }
+                if (flags == UPDATE_ALWAYS) {
 
-                    @Override
-                    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                        super.onScrolled(recyclerView, dx, dy);
-                    }
-                });
+                    source.addOnPageChangeListener(new OnPageChangeListener() {
+                        @Override
+                        public void onPageChanged(int oldPage, int newPage) {
+                            updateCurrentPosition(newPage);
+                        }
+                    });
+
+                } else if (flags == UPDATE_ON_SCROLL_STATUS_CHANGE) {
+
+                    source.addOnScrollListener(new OnScrollListener() {
+                        @Override
+                        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                            updateCurrentPosition(source.getCurrentPage());
+                        }
+
+                        @Override
+                        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                            super.onScrolled(recyclerView, dx, dy);
+                        }
+                    });
+                }
             }
         });
     }
 
-    private void updateCurrentPosition() {
-        int position = findCenterPosition();
+    private void updateCurrentPosition(int newPage) {
+        int position = newPage;
 
         if (position != currentPosition && position >= 0 && position < adapter.getItemCount()) {
             currentPosition = position;
