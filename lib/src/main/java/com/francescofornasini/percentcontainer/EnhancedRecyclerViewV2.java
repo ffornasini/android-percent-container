@@ -46,8 +46,8 @@ public class EnhancedRecyclerViewV2 extends EnhancedRecyclerView {
                 Log.d(TAG, "onScrolled() called with: recyclerView = [" + recyclerView + "], dx = [" + dx + "], dy = [" + dy + "]");
                 Log.d(TAG, "onScrolled()" + recyclerView.getScrollX());
                 Log.d(TAG, "onScrolled()" + getLayoutManager().getPosition(new LinearSnapHelper().findSnapView(getLayoutManager())));
-                View snapView = linearSnapHelper.findSnapView(getLayoutManager());
-                int snapPosition = getLayoutManager().getPosition(snapView);
+                int snapPosition = getCurrentPage();
+
                 if (snapPosition != currentPage) {
                     int oldPage = currentPage;
                     currentPage = snapPosition;
@@ -61,7 +61,8 @@ public class EnhancedRecyclerViewV2 extends EnhancedRecyclerView {
     }
 
     public int getCurrentPage() {
-        return currentPage;
+        View snapView = linearSnapHelper.findSnapView(getLayoutManager());
+        return getLayoutManager().getPosition(snapView);
     }
 
     public interface OnPageChangeListener {

@@ -110,8 +110,10 @@ public class RecyclerPagerIndicator extends EnhancedRecyclerViewV3 {
         int position = newPage;
 
         if (position != currentPosition && position >= 0 && position < adapter.getItemCount()) {
+            int oldPosition = currentPosition;
             currentPosition = position;
-            adapter.notifyItemRangeChanged(0, adapter.getItemCount());
+            //TODO test me
+            adapter.notifyItemRangeChanged(Math.min(oldPosition, currentPosition), Math.abs(currentPosition - oldPosition) + 1);
             innerScrollToPosition(this, position);
         }
     }
