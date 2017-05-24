@@ -43,9 +43,9 @@ public class EnhancedRecyclerViewV2 extends EnhancedRecyclerView {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                Log.d(TAG, "onScrolled() called with: recyclerView = [" + recyclerView + "], dx = [" + dx + "], dy = [" + dy + "]");
-                Log.d(TAG, "onScrolled()" + recyclerView.getScrollX());
-                Log.d(TAG, "onScrolled()" + getLayoutManager().getPosition(new LinearSnapHelper().findSnapView(getLayoutManager())));
+                //Log.d(TAG, "onScrolled() called with: recyclerView = [" + recyclerView + "], dx = [" + dx + "], dy = [" + dy + "]");
+                //Log.d(TAG, "onScrolled()" + recyclerView.getScrollX());
+                //Log.d(TAG, "onScrolled()" + getLayoutManager().getPosition(new LinearSnapHelper().findSnapView(getLayoutManager())));
                 int snapPosition = getCurrentPage();
 
                 if (snapPosition != currentPage) {
