@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CircularView">
+
+        <!-- angle in pi * radians  for the start of the quadrant range:
+        can be 0 to start from the top of the circle, 0.5 for 3 OClock, 1 for 6 OClock etc ..
+        can also be a negative number. It has to be < of radians_max ! -->
+        <attr name="radians_min" format="float" />
+
+        <!-- angle in pi * radians  for the end of the hand range:
+        can be 0 to end at the top of the circle, 0.5 for 3 OClock, 1 for 6 OClock etc ..
+        can also be a negative number. It has to be > of radians_min ! -->
+        <attr name="radians_max" format="float" />
+
+    </declare-styleable>
+
+    <declare-styleable name="HandView">
+
+        <!-- minimum value that will be signed by the hand -->
+        <attr name="range_min" format="float" />
+
+        <!-- maximum value that will be signed by the hand -->
+        <attr name="range_max" format="float" />
+
+        <!-- true to invert registered values of the sensors according to max and min ranges -->
+        <attr name="invert_value" format="boolean" />
+
+        <!-- hand image source, can be null to draw a simple colored line, see next attrs to style the line -->
+        <attr name="hand_image" format="reference" />
+
+
+        <attr name="hand_color" format="color" />
+
+        <!-- wont be used when image is specified -->
+        <attr name="hand_width" format="dimension" />
+
+        <!-- length of the hand in % to the available length -->
+        <!-- wont be used when image is specified -->
+        <attr name="hand_length" format="float" />
+
+        <!-- padding from the center to the start of the hand in % to the available length -->
+        <!-- can be negative and will also be applied to the hand image if specified -->
+        <attr name="hand_center_padding" format="float" />
+
+        <!-- sensor/value that will be displayed -->
+        <attr name="sensor" format="enum">
+            <enum name="second" value="0"/>
+            <enum name="minute" value="1"/>
+            <enum name="hour" value="2"/>
+            <enum name="accelX" value="3"/>
+            <enum name="accelY" value="4"/>
+            <enum name="accelZ" value="5"/>
+        </attr>
+
+    </declare-styleable>
+
+    <declare-styleable name="QuadrantView">
+
+        <!-- starting type (middle or edge of the segment) -->
+        <attr name="segment_type" format="enum">
+            <enum name="middle" value="0"/>
+            <enum name="edge" value="1"/>
+        </attr>
+
+        <!-- segment count -->
+        <attr name="segment_count" format="integer" />
+
+        <!-- width of the segment in % to the available space -->
+        <attr name="segment_width" format="float" />
+
+        <!-- height of the segments in % to the available space -->
+        <attr name="segment_height" format="float" />
+
+        <!-- padding from the center to the start of the segment in % to the available space -->
+        <attr name="segment_center_padding" format="float" />
+
+        <attr name="segment_color" format="color" />
+
+    </declare-styleable>
+
+    <declare-styleable name="QuadrantLayout">
+
+        <!-- starting type (middle or edge of the segment) -->
+        <attr name="sector_type" format="enum">
+            <enum name="middle" value="0"/>
+            <enum name="edge" value="1"/>
+        </attr>
+
+        <!-- segment count -->
+        <attr name="sector_count" format="integer" />
+
+        <!-- shape of the elements positioning -->
+        <attr name="shape" format="enum">
+            <enum name="oval" value="0"/>
+            <enum name="rect" value="1"/>
+        </attr>
+
+
+
+    </declare-styleable>
+
+    <declare-styleable name="SpriteView">
+
+        <!-- lower sprite that will move on the x axis -->
+        <attr name="sprite_x" format="reference" />
+        <attr name="sprite_x_count_width" format="integer" />
+        <attr name="sprite_x_count" format="integer" />
+
+        <!-- upper sprite that will move on the y axis -->
+        <attr name="sprite_y" format="reference" />
+        <attr name="sprite_y_count_width" format="integer" />
+        <attr name="sprite_y_count" format="integer" />
+
+        <!-- the image behind the sprites. It will give dimensions to the view -->
+        <attr name="base" format="reference" />
+
+        <!-- color filter to apply on the base -->
+        <attr name="base_color" format="color" />
+
+        <attr name="invert" format="enum">
+            <enum name="none" value="0"/>
+            <enum name="x" value="1"/>
+            <enum name="y" value="2"/>
+            <enum name="xy" value="3"/>
+            <enum name="invert" value="4"/>
+            <enum name="invert_x" value="5"/>
+            <enum name="invert_y" value="6"/>
+            <enum name="invert_xy" value="7"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="PercentLayout_LayoutParams">
+
+        <!-- center X of the child in % to the available space -->
+        <attr name="layout_center_x" format="float" />
+        <!-- center Y of the child in % to the available space -->
+        <attr name="layout_center_y" format="float" />
+
+        <!-- width of the child in % to the available space -->
+        <attr name="layout_width_percent" format="float" />
+        <!-- height of the child in % to the available space -->
+        <attr name="layout_height_percent" format="float" />
+
+    </declare-styleable>
+
+    <declare-styleable name="QuadrantLayout_LayoutParams">
+
+        <attr name="layout_sector_gravity" format="enum">
+
+            <!-- with child external edges at the edge of the layout : default -->
+            <enum name="external_edge" value="0"/>
+            <!-- child center on the edge of the layout : default -->
+            <enum name="center_edge" value="1"/>
+            <!-- child center at the value specified on sector_center_padding -->
+            <enum name="center" value="2"/>
+        </attr>
+
+        <!-- padding from the center to the start of the segment in % to the available space
+             (used only if sector_gravity_type == center)-->
+        <attr name="layout_sector_center_padding" format="float" />
+
+    </declare-styleable>
+</resources>
