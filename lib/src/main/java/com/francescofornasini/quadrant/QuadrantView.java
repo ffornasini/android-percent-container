@@ -93,7 +93,7 @@ public class QuadrantView extends CircularView {
         float availableDegrees = (mRadiansMax - mRadiansMin) * 180f;
         float sweep = (availableDegrees / (float)mSegmentCount);
         float segmentWidth = sweep * mSegmentWidth;
-        float segmentPadding = sweep * ((1f - mSegmentWidth) / 2f);
+        float segmentPadding = - segmentWidth / 2f;
 
         float availableSegmentHeight = Math.min(getWidth() / 2f, getHeight() / 2f);
         float segmentHeight = availableSegmentHeight * mSegmentHeight;
@@ -110,7 +110,7 @@ public class QuadrantView extends CircularView {
         if (mSegmentType == EDGE) {
             startPadding = segmentPadding;
         } else if (mSegmentType == MIDDLE) {
-            startPadding = - (sweep / 2f);
+            startPadding = - (sweep / 2f) + segmentPadding;
         } else {
             //CLog.i(this, "ERROR!! startPadding at zero");
             startPadding = 0f;
@@ -125,7 +125,9 @@ public class QuadrantView extends CircularView {
 
         for (int i = 0; i < mSegmentCount; i++) {
 
-            canvas.drawArc(mRect, i * sweep + startPadding, segmentWidth, false, mPaint);
+            float startAngle = i * sweep + startPadding;
+            float sweepAngle = segmentWidth;
+            canvas.drawArc(mRect, startAngle, sweepAngle, false, mPaint);
         }
     }
 }
