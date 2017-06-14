@@ -48,4 +48,22 @@ public class CircularLayout extends FrameLayout {
             a.recycle();
         }
     }
+
+    public float getRadiansMin() {
+        return mRadiansMin;
+    }
+
+    public float getRadiansMax() {
+        return mRadiansMax;
+    }
+
+    public void setRadiansMin(float radiansMin) {
+        this.mRadiansMin = radiansMin;
+        invalidate();
+    }
+
+    public void setRadiansMax(float radiansMax) {
+        this.mRadiansMax = radiansMax;
+        invalidate();
+    }
 }

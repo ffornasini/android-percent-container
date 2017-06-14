@@ -6,10 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.hardware.SensorEvent;
-import android.text.format.Time;
 import android.util.AttributeSet;
-import android.view.View;
 
 import com.francescofornasini.percentcontainer.R;
 
@@ -91,9 +88,9 @@ public class QuadrantView extends CircularView {
     protected void onDraw(Canvas canvas) {
 
         float availableDegrees = (mRadiansMax - mRadiansMin) * 180f;
-        float sweep = (availableDegrees / (float)mSegmentCount);
+        float sweep = (availableDegrees / (float) mSegmentCount);
         float segmentWidth = sweep * mSegmentWidth;
-        float segmentPadding = - segmentWidth / 2f;
+        float segmentPadding = -segmentWidth / 2f;
 
         float availableSegmentHeight = Math.min(getWidth() / 2f, getHeight() / 2f);
         float segmentHeight = availableSegmentHeight * mSegmentHeight;
@@ -101,8 +98,8 @@ public class QuadrantView extends CircularView {
 
         mRect.top = availableSegmentHeight - (segmentCenterPadding + (segmentHeight / 2f));
         mRect.left = availableSegmentHeight - (segmentCenterPadding + (segmentHeight / 2f));
-        mRect.right = (float)getWidth() - mRect.left;
-        mRect.bottom = (float)getHeight() - mRect.top;
+        mRect.right = (float) getWidth() - mRect.left;
+        mRect.bottom = (float) getHeight() - mRect.top;
 
         mPaint.setStrokeWidth(segmentHeight);
 
@@ -110,7 +107,7 @@ public class QuadrantView extends CircularView {
         if (mSegmentType == EDGE) {
             startPadding = segmentPadding;
         } else if (mSegmentType == MIDDLE) {
-            startPadding = - (sweep / 2f) + segmentPadding;
+            startPadding = -(sweep / 2f) + segmentPadding;
         } else {
             //CLog.i(this, "ERROR!! startPadding at zero");
             startPadding = 0f;
@@ -129,5 +126,59 @@ public class QuadrantView extends CircularView {
             float sweepAngle = segmentWidth;
             canvas.drawArc(mRect, startAngle, sweepAngle, false, mPaint);
         }
+    }
+
+    public int getSegmentType() {
+        return mSegmentType;
+    }
+
+    public void setSegmentType(int segmentType) {
+        this.mSegmentType = segmentType;
+        invalidate();
+    }
+
+    public int getSegmentCount() {
+        return mSegmentCount;
+    }
+
+    public void setSegmentCount(int segmentCount) {
+        this.mSegmentCount = segmentCount;
+        invalidate();
+    }
+
+    public float getSegmentWidth() {
+        return mSegmentWidth;
+    }
+
+    public void setSegmentWidth(float segmentWidth) {
+        this.mSegmentWidth = segmentWidth;
+        invalidate();
+    }
+
+    public float getSegmentHeight() {
+        return mSegmentHeight;
+    }
+
+    public void setSegmentHeight(float segmentHeight) {
+        this.mSegmentHeight = segmentHeight;
+        invalidate();
+    }
+
+    public float getSegmentCenterPadding() {
+        return mSegmentCenterPadding;
+    }
+
+    public void setSegmentCenterPadding(float segmentCenterPadding) {
+        this.mSegmentCenterPadding = segmentCenterPadding;
+        invalidate();
+    }
+
+    public int getSegmentColor() {
+        return mSegmentColor;
+    }
+
+    public void setSegmentColor(int segmentColor) {
+        this.mSegmentColor = segmentColor;
+        invalidate();
     }
 }

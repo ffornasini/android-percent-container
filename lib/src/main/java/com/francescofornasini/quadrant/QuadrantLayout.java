@@ -46,6 +46,33 @@ public class QuadrantLayout extends CircularLayout {
         initAttrs(context, attrs);
     }
 
+    public int getSectorCount() {
+        return mSectorCount;
+    }
+
+    public void setSectorCount(int sectorCount) {
+        this.mSectorCount = sectorCount;
+        requestLayout();
+    }
+
+    public int getSectorType() {
+        return mSectorType;
+    }
+
+    public void setSectorType(int sectorType) {
+        this.mSectorType = sectorType;
+        requestLayout();
+    }
+
+    public int getShape() {
+        return mShape;
+    }
+
+    public void setShape(int shape) {
+        this.mShape = shape;
+        requestLayout();
+    }
+
     private void initAttrs(Context context, AttributeSet attrs) {
 
         TypedArray a = context.getTheme().obtainStyledAttributes(
