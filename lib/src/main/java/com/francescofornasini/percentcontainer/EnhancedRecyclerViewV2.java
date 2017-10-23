@@ -62,7 +62,7 @@ public class EnhancedRecyclerViewV2 extends EnhancedRecyclerView {
 
     public int getCurrentPage() {
         View snapView = linearSnapHelper.findSnapView(getLayoutManager());
-        return getLayoutManager().getPosition(snapView);
+        return snapView == null ? 0 : getLayoutManager().getPosition(snapView);
     }
 
     public interface OnPageChangeListener {

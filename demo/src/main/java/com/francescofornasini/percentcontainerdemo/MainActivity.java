@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 
 import com.francescofornasini.percentcontainer.EnhancedRecyclerViewV3;
+import com.francescofornasini.percentcontainer.LinePagerIndicatorDecoration;
 import com.francescofornasini.percentcontainer.RecyclerPagerIndicator;
 
 import butterknife.BindView;
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
         SnapHelper pagerSnapHelper = new PagerSnapHelper();
         pagerSnapHelper.attachToRecyclerView(mRecycler);
+
+        mRecycler.addItemDecoration(new LinePagerIndicatorDecoration());
 
         mRecyclerTitlerIndicator.setRecycler(mRecycler, RecyclerPagerIndicator.UPDATE_ALWAYS, "TITLER");
         mRecyclerPagerIndicator.setRecycler(mRecycler, RecyclerPagerIndicator.UPDATE_ON_SCROLL_STATUS_CHANGE, "PAGER");

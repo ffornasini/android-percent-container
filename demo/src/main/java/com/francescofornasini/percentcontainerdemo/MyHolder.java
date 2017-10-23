@@ -35,7 +35,7 @@ class MyHolder extends RecyclerView.ViewHolder {
 
     public void bindView(String s, int position) {
         //mPercentView.setPercentX(0.1f * ((position % 3) + 2));
-        mPercentView.setPercentX(0.8f);
+        //mPercentView.setPercentX(0.8f);
         mTextView.setText(s);
         mTextView.setBackgroundColor(colors[position % colors.length]);
     }

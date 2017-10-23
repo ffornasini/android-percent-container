@@ -31,6 +31,7 @@
         app:adjust_padding_horizontal="true"
         android:layout_height="400dp"
         android:id="@+id/recycler"
+        android:background="#000"
         />
 
     <com.francescofornasini.percentcontainer.RecyclerPagerIndicator
