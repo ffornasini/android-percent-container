@@ -6,6 +6,7 @@ android:
    - tools
    - platform-tools
    - build-tools-26.0.1
+   - android-21
    - android-25
    - addon-google_apis-google-21
    - addon-google_apis-google-25
@@ -13,7 +14,7 @@ android:
    - extra-google-m2repository
    - extra-google-google_play_services
    - extra-android-support
-   - sys-img-armeabi-v7a-google_apis-21
+   - sys-img-armeabi-v7a-addon-google_apis-google-21
 before_install:
   - mkdir "$ANDROID_HOME/licenses" || true
   - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
